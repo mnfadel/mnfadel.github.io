@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MyAi for Oracle Fusion</title>
+<meta name="description" content="MyAi is an AI assistant for Oracle Fusion Cloud ERP. Finance teams ask in plain language and get answers from their own Oracle data, with each person signed in as themselves and read-only access.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="MyAi for Oracle Fusion">
+<meta property="og:description" content="Ask your Oracle Fusion ERP in plain language. Verified answers, as yourself.">
+<meta property="og:url" content="https://mnfadel.github.io/">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#0b1022">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%230a86a8'/%3E%3Cstop offset='1' stop-color='%235b3fd0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='18' fill='url(%23g)'/%3E%3Cpath d='M16 45V22.5c0-1.6 2-2.4 3.1-1.2L32 35l12.9-13.7c1.1-1.2 3.1-.4 3.1 1.2V45' fill='none' stroke='%23fff' stroke-width='5.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='32' cy='17.5' r='4' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0b1022; --purple:#5b3fd0; --teal:#0a86a8;
+  --bg:#f6f7fb; --panel:#ffffff; --ink:#141a33; --soft:#4a5270; --line:#e2e5f0;
+  --accent:#4a32b8; --accent2:#087594; --chip:#eef0fa;
+}
+@media (prefers-color-scheme: dark){
+  :root{ --bg:#0b1022; --panel:#131a35; --ink:#eef2ff; --soft:#b9c0de; --line:#262f55;
+         --accent:#a594ff; --accent2:#5fd0ee; --chip:#1a2244; }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:17px/1.6 Inter,"Segoe UI",Arial,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--accent2)}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+/* top bar */
+.bar{position:absolute;top:0;left:0;right:0;z-index:2}
+.bar .wrap{display:flex;align-items:center;justify-content:space-between;height:72px}
+.brand{display:flex;align-items:center;gap:12px;color:#fff;text-decoration:none;font-weight:700;font-size:18px}
+.brand svg{width:36px;height:36px;display:block}
+.bar nav{display:flex;gap:22px}
+.bar nav a{color:#c7cdea;text-decoration:none;font-size:15px;font-weight:500}
+.bar nav a:hover{color:#fff}
+/* hero */
+.hero{color:#eef2ff;padding:150px 0 110px;
+  background:radial-gradient(900px 520px at 80% 15%,rgba(91,63,208,.42),transparent 60%),
+             radial-gradient(800px 520px at 8% 95%,rgba(10,134,168,.38),transparent 60%),#0b1022}
+.hero .mark svg{width:84px;height:84px;display:block}
+.hero h1{font-size:clamp(36px,6vw,64px);line-height:1.08;letter-spacing:-1.5px;margin:28px 0 18px;font-weight:800;max-width:15ch}
+.hero h1 .g{background:linear-gradient(90deg,#3fc6e6,#8f78ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p.lede{font-size:clamp(18px,2.2vw,22px);color:#c7cdea;max-width:58ch;margin:0 0 34px}
+.btns{display:flex;flex-wrap:wrap;gap:14px}
+.btn{display:inline-block;padding:14px 24px;border-radius:12px;font-weight:600;text-decoration:none;font-size:16px}
+.btn.primary{background:linear-gradient(135deg,#0a86a8,#5b3fd0);color:#fff}
+.btn.ghost{border:1px solid rgba(255,255,255,.3);color:#eef2ff}
+.btn:hover{filter:brightness(1.1)}
+/* sections */
+section{padding:84px 0}
+section.alt{background:var(--panel);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.eyebrow{color:var(--accent);font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:13px;margin:0 0 10px}
+h2{font-size:clamp(28px,3.6vw,40px);line-height:1.15;letter-spacing:-.6px;margin:0 0 18px;font-weight:800}
+.intro{color:var(--soft);max-width:66ch;margin:0 0 36px;font-size:18px}
+.grid{display:grid;gap:20px}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:26px 24px}
+section.alt .card{background:var(--bg)}
+.card h3{margin:0 0 8px;font-size:19px;letter-spacing:-.2px}
+.card p{margin:0;color:var(--soft);font-size:16px}
+.num{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:10px;
+  background:linear-gradient(135deg,#0a86a8,#5b3fd0);color:#fff;font-weight:700;font-size:15px;margin-bottom:14px}
+.icon{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;
+  background:var(--chip);color:var(--accent);margin-bottom:14px}
+.icon svg{width:22px;height:22px}
+ul.ticks{list-style:none;padding:0;margin:0;display:grid;gap:14px}
+ul.ticks li{position:relative;padding-left:34px;color:var(--soft)}
+ul.ticks li b{color:var(--ink)}
+ul.ticks li::before{content:"";position:absolute;left:0;top:4px;width:20px;height:20px;border-radius:6px;
+  background:linear-gradient(135deg,#0a86a8,#5b3fd0)}
+ul.ticks li::after{content:"";position:absolute;left:7px;top:8px;width:5px;height:9px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
+/* status */
+.status{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
+.stat{border-left:3px solid var(--accent);padding:4px 0 4px 18px}
+.stat b{display:block;font-size:22px;letter-spacing:-.3px}
+.stat span{color:var(--soft);font-size:15px}
+/* founder */
+.founder{display:grid;grid-template-columns:200px 1fr;gap:40px;align-items:center}
+.founder img{width:200px;height:200px;border-radius:50%;object-fit:cover;
+  box-shadow:0 0 0 5px var(--bg),0 0 0 8px #6e5be0}
+.founder h3{font-size:26px;margin:0 0 4px}
+.founder .role{color:var(--accent2);font-weight:600;margin:0 0 14px}
+.founder p{color:var(--soft);margin:0 0 10px}
+/* contact */
+.contact{color:#eef2ff;text-align:center;
+  background:radial-gradient(700px 360px at 85% 10%,rgba(91,63,208,.4),transparent 60%),
+             radial-gradient(700px 360px at 10% 100%,rgba(10,134,168,.35),transparent 60%),#0b1022}
+.contact h2{color:#eef2ff}
+.contact p{color:#c7cdea;max-width:56ch;margin:0 auto 28px}
+.contact .btns{justify-content:center}
+footer{padding:28px 0 36px;color:var(--soft);font-size:13px;text-align:center;background:var(--bg)}
+footer p{margin:4px 0}
+@media (max-width:900px){
+  .g3,.g4,.status{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:640px){
+  body{font-size:16px}
+  .bar nav{display:none}
+  .hero{padding:118px 0 76px}
+  .hero .mark svg{width:64px;height:64px}
+  section{padding:60px 0}
+  .g2,.g3,.g4,.status{grid-template-columns:1fr}
+  .founder{grid-template-columns:1fr;gap:24px}
+  .founder img{margin:0 auto;width:160px;height:160px}
+  .btn{width:100%;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="MyAi home">
+      <svg viewBox="0 0 64 64" role="img" aria-hidden="true"><defs><linearGradient id="mg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0a86a8"/><stop offset="1" stop-color="#5b3fd0"/></linearGradient></defs><rect width="64" height="64" rx="18" fill="url(#mg1)"/><path d="M16 45V22.5c0-1.6 2-2.4 3.1-1.2L32 35l12.9-13.7c1.1-1.2 3.1-.4 3.1 1.2V45" fill="none" stroke="#fff" stroke-width="5.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="32" cy="17.5" r="4" fill="#fff"/></svg>
+      MyAi
+    </a>
+    <nav>
+      <a href="#how">How it works</a>
+      <a href="#where">Where it runs</a>
+      <a href="#security">Security</a>
+      <a href="#founder">Founder</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+<div class="hero">
+  <div class="wrap">
+    <div class="mark">
+      <svg viewBox="0 0 64 64" role="img" aria-label="MyAi"><defs><linearGradient id="mg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0a86a8"/><stop offset="1" stop-color="#5b3fd0"/></linearGradient></defs><rect width="64" height="64" rx="18" fill="url(#mg2)"/><path d="M16 45V22.5c0-1.6 2-2.4 3.1-1.2L32 35l12.9-13.7c1.1-1.2 3.1-.4 3.1 1.2V45" fill="none" stroke="#fff" stroke-width="5.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="32" cy="17.5" r="4" fill="#fff"/></svg>
+    </div>
+    <h1>Ask your Oracle Fusion ERP in plain language. <span class="g">Verified answers, as yourself.</span></h1>
+    <p class="lede">MyAi is an AI assistant for companies that run Oracle Fusion Cloud ERP. Finance teams and managers ask about open invoices, aging, trial balances and cash, and get answers, tables and Excel files drawn live from their own Oracle data.</p>
+    <div class="btns">
+      <a class="btn primary" href="mailto:mnfadel@proton.me?subject=MyAi%20early%20access">Request early access</a>
+      <a class="btn ghost" href="#how">See how it works</a>
+    </div>
+  </div>
+</div>
+
+<section id="problem">
+  <div class="wrap">
+    <p class="eyebrow">The problem</p>
+    <h2>The answers are already in the ERP. Getting them out takes specialists.</h2>
+    <div class="grid g3">
+      <div class="card">
+        <h3>Questions queue up</h3>
+        <p>Someone has to know which screen or report to open, run it, export to Excel and reconcile. Managers wait on a small ERP and BI team, and month-end questions pile up.</p>
+      </div>
+      <div class="card">
+        <h3>Generic chatbots can’t reach the ERP safely</h3>
+        <p>Connecting a general-purpose AI usually means a shared service account, which bypasses each person’s security.</p>
+      </div>
+      <div class="card">
+        <h3>A plausible wrong figure is worse than none</h3>
+        <p>In finance, a number that merely looks right does real damage. Answers have to come from the ledger, not from a guess.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="how" class="alt">
+  <div class="wrap">
+    <p class="eyebrow">How it works</p>
+    <h2>Built on Oracle’s own security, read-only by design</h2>
+    <p class="intro">MyAi connects Anthropic’s Claude to Oracle Fusion for every person in the company, without widening anyone’s access.</p>
+    <div class="grid g4">
+      <div class="card">
+        <div class="num">1</div>
+        <h3>Each person signs in as themselves</h3>
+        <p>Through the company’s own identity domain (OAuth). There is no service account, so Oracle’s data security applies to every answer.</p>
+      </div>
+      <div class="card">
+        <div class="num">2</div>
+        <h3>Read-only, always</h3>
+        <p>MyAi can read, never change data, and never send, print or e-mail documents from Oracle.</p>
+      </div>
+      <div class="card">
+        <div class="num">3</div>
+        <h3>Every query is checked</h3>
+        <p>Queries are checked against Oracle’s API definitions before they run.</p>
+      </div>
+      <div class="card">
+        <div class="num">4</div>
+        <h3>Answers rest on Oracle’s figures</h3>
+        <p>Only figures Oracle returned make it into an answer. Gaps are stated, not filled.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="where">
+  <div class="wrap">
+    <p class="eyebrow">Where it runs</p>
+    <h2>Three ways to use it</h2>
+    <div class="grid g3">
+      <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+        <h3>Inside Claude</h3>
+        <p>A connector that brings your Oracle Fusion data into Claude, where many people already work.</p>
+      </div>
+      <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/></svg></div>
+        <h3>In the browser</h3>
+        <p>MyAi Web: the same assistant as a web chat, with tables and Excel downloads.</p>
+      </div>
+      <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="7" rx="1.5"/><rect x="3" y="14" width="18" height="7" rx="1.5"/><path d="M7 6.5h.01M7 17.5h.01"/></svg></div>
+        <h3>Self-hosted</h3>
+        <p>On your own servers, for organisations that keep systems in-house or in-country.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="security" class="alt">
+  <div class="wrap">
+    <div class="grid g2" style="gap:48px;align-items:start">
+      <div>
+        <p class="eyebrow">For finance teams and their auditors</p>
+        <h2>A security model large finance teams can accept</h2>
+        <p class="intro" style="margin-bottom:0">MyAi covers Financials in depth: Payables, Receivables, General Ledger and Cash Management. It runs Oracle’s standard reports and the company’s own BI Publisher reports through Oracle’s scheduler, as the person asking, with Excel and Oracle-layout output.</p>
+      </div>
+      <ul class="ticks">
+        <li><b>No shared or service account.</b> Every person signs in to Oracle as themselves.</li>
+        <li><b>Oracle decides what each person sees.</b> Its data security applies to every answer.</li>
+        <li><b>Read-only.</b> No data changes, and nothing is sent, printed or e-mailed from Oracle.</li>
+        <li><b>Checked before it runs.</b> Queries are validated against Oracle’s API definitions.</li>
+        <li><b>Accuracy gates.</b> An evaluation suite and an automatic answer check guard every release and every answer.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="status">
+  <div class="wrap">
+    <p class="eyebrow">Status</p>
+    <h2>Where MyAi is today</h2>
+    <div class="status">
+      <div class="stat"><b>Version 1.0</b><span>Released in October 2026</span></div>
+      <div class="stat"><b>First enterprise deployment</b><span>Self-hosted, now in rollout</span></div>
+      <div class="stat"><b>Hosted service</b><span>Launching soon; early access by e-mail</span></div>
+      <div class="stat"><b>About 2,300 automated tests</b><span>Plus a 412-check evaluation gate</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="founder" class="alt">
+  <div class="wrap">
+    <div class="founder">
+      <img src="founder.jpg" alt="Mohamad Fadel" width="200" height="200">
+      <div>
+        <p class="eyebrow">Founder</p>
+        <h3>Mohamad Fadel</h3>
+        <p class="role">Founder, MyAi · Oracle developer for over a decade</p>
+        <p>Mohamad designed and built MyAi end to end. He is an Oracle developer and systems analyst with over a decade in enterprise software: Oracle Cloud ERP integration, business-intelligence reporting, identity and single sign-on, and full-cycle application development in Java, C#, Oracle ADF, APEX and Forms.</p>
+        <p>B.S. in Computer &amp; Communication Engineering, American University of Science &amp; Technology (AUST), Lebanon. Based in Beirut.</p>
+        <p><a href="https://www.linkedin.com/in/moh-d-fadel-44b25b48">LinkedIn profile</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <div class="wrap">
+    <h2>Talk to us</h2>
+    <p>Running Oracle Fusion Cloud ERP and want early access, a demo or a pilot? Write to the founder directly.</p>
+    <div class="btns">
+      <a class="btn primary" href="mailto:mnfadel@proton.me">mnfadel@proton.me</a>
+      <a class="btn ghost" href="https://www.linkedin.com/in/moh-d-fadel-44b25b48">LinkedIn</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>© 2026 Mohamad Fadel · MyAi for Oracle Fusion</p>
+    <p>Oracle and Oracle Fusion are trademarks of Oracle Corporation; MyAi is independent and not affiliated with Oracle. Claude is a product of Anthropic.</p>
+  </div>
+</footer>
+</body>
+</html>
